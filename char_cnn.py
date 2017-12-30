@@ -7,9 +7,10 @@ from keras.layers import ThresholdedReLU
 from keras.layers import Dropout
 from keras.optimizers import Adam
 
-print "Loading the configurations...",
+print( "Loading the configurations...")
 
-execfile("config.py")
+#execfile("config.py")
+exec(open("./config.py").read())
 conv_layers = config.model.conv_layers
 fully_layers = config.model.fully_connected_layers
 l0 = config.l0
@@ -18,10 +19,10 @@ embedding_size = config.model.embedding_size
 num_of_classes = config.num_of_classes
 th = config.model.th
 p = config.dropout_p
-print "Loaded"
+print ("Loaded")
 
 
-print "Building the model...",
+print ("Building the model...")
 # building the model
 
 # Input layer
@@ -59,10 +60,10 @@ optimizer = Adam()
 model.compile(optimizer=optimizer, loss='categorical_crossentropy')
 
 	
-print "Built"
+print ("Built")
 
 
-print "Loading the data sets...",
+print ("Loading the data sets...")
 
 from data_utils import Data
 
@@ -87,14 +88,14 @@ dev_data.loadData()
 
 X_val, y_val = dev_data.getAllData()
 
-print "Loadded"
+print ("Loadded")
 
 
-print "Training ..."
+print ("Training ...")
 
-model.fit(X_train, y_train, nb_epoch=config.training.epochs, batch_size=config.batch_size, validation_data=(X_val, y_val))
+model.fit(X_train, y_train, epochs=config.training.epochs, batch_size=config.batch_size, validation_data=(X_val, y_val))
 
-print "Done!."
+print ("Done!.")
 
 
 
